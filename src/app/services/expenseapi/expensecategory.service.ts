@@ -16,17 +16,17 @@ export class ExpensecategoryService {
     "cache-control": "no-cache"
   }
 
-  incomeCategoryUrl: string = "https://moneytracker-5a2f.restdb.io/rest/incomecategory"
+  expenseCategoryUrl: string = "https://moneytracker-5a2f.restdb.io/rest/expencecategory"
 
   constructor(http: Http) {
     this.http = http;
   }
 
-  getIncomeCategory() {
+  getExpenseCategory() {
     var responseObservable = map((response: Response) => {
       return response.json();
     });
-    return responseObservable(this.http.get(this.incomeCategoryUrl, {headers: this.headers}))
+    return responseObservable(this.http.get(this.expenseCategoryUrl, {headers: this.headers}))
   }
 }
 

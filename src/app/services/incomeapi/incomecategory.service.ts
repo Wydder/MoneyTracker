@@ -16,7 +16,7 @@ export class IncomecategoryService {
     "cache-control": "no-cache"
   }
 
-  expenseCategoryUrl: string = "https://moneytracker-5a2f.restdb.io/rest/expensecategory"
+  incomeCategoryUrl: string = "https://moneytracker-5a2f.restdb.io/rest/incomecategory"
 
   constructor(http: Http) {
     this.http = http;
@@ -26,7 +26,7 @@ export class IncomecategoryService {
     var responseObservable = map((response: Response) => {
       return response.json();
     });
-    return responseObservable(this.http.get(this.expenseCategoryUrl, {headers: this.headers}))
+    return responseObservable(this.http.get(this.incomeCategoryUrl, {headers: this.headers}))
   }
 
 }

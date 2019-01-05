@@ -1,3 +1,16 @@
-<p>
-  newexpense works!
-</p>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons routerLink="/home/reports" slot="start">
+            <ion-button fill="solid" color="primary">
+                <ion-icon slot="start" name="arrow-back"></ion-icon>
+                Back
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Add expense
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding>
+    <app-fgexpense></app-fgexpense>
+</ion-content>
