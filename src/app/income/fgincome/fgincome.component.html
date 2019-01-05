@@ -1,0 +1,24 @@
+<form (ngSubmit)="logForm()">
+  <ion-item>
+    <ion-label>Name</ion-label>
+    <ion-input type="text" name="title"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Ammount</ion-label>
+    <ion-input type="number" name="description"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Date</ion-label>
+    <ion-datetime display-format="DD/MM/YYYY"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>Income Category</ion-label>
+    <ion-select value="brown" ok-text="Okay" cancel-text="Dismiss">
+      <ion-select-option value="brown">Brown</ion-select-option>
+      <ion-select-option value="blonde">Blonde</ion-select-option>
+      <ion-select-option value="black">Black</ion-select-option>
+      <ion-select-option value="red">Red</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-button color="primary">Add income</ion-button>
+</form>
