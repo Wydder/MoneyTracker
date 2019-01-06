@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Incomecategory } from 'src/app/classes/incomecategory';
 import { IncomecategoryService } from 'src/app/services/incomeapi/incomecategory.service';
@@ -11,15 +11,20 @@ import { Income } from "src/app/classes/income";
 })
 export class FgincomeComponent implements OnInit {
 
+    // INPUT
+    @Input()
     incomeModel: Income;
+
+    // OUTPUT
+    @Output()
+    incomeFormOutput: EventEmitter<Income> = new EventEmitter();
+    
     categoryList: Incomecategory[] = [];
     incomeCategoryApi: IncomecategoryService;
 
     constructor(incomeCategoryApi: IncomecategoryService) {
-        this.incomeModel = new Income();
         this.incomeCategoryApi = incomeCategoryApi;
         this.getIncomeCategoryList();
-        console.log(this.categoryList);
     }
 
     ngOnInit() {
@@ -28,6 +33,7 @@ export class FgincomeComponent implements OnInit {
 
     logForm() {
         console.log(this.incomeModel)
+        this.incomeFormOutput.emit(this.incomeModel)
     }
 
     getIncomeCategoryList() {

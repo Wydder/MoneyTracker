@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Expensecategory } from "src/app/classes/expensecategory";
 import { ExpensecategoryService } from "src/app/services/expenseapi/expensecategory.service";
+import { Input, Output } from "@angular/core";
+import { Expense } from "src/app/classes/expense";
 
 @Component({
     selector: 'app-fgexpense',
@@ -8,6 +10,14 @@ import { ExpensecategoryService } from "src/app/services/expenseapi/expensecateg
     styleUrls: ['./fgexpense.component.scss']
 })
 export class FgexpenseComponent implements OnInit {
+
+    // INPUT
+    @Input()
+    expenseModel: Expense;
+
+    // OUTPUT
+    @Output()
+    expenseFormOutput: EventEmitter<Expense> = new EventEmitter();
 
     categoryList: Expensecategory[] = [];
     expenseCategoryApi: ExpensecategoryService;
@@ -22,7 +32,8 @@ export class FgexpenseComponent implements OnInit {
     }
 
     logForm() {
-        console.log('Hahaha productions')
+        console.log(this.expenseModel)
+        this.expenseFormOutput.emit(this.expenseModel)
     }
 
     getExpenseCategoryList() {

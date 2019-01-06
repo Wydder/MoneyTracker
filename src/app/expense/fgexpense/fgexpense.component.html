@@ -1,21 +1,21 @@
-<form (ngSubmit)="logForm()">
+<form #incomeForm="ngForm" (ngSubmit)="logForm()">
     <ion-item>
         <ion-label position="stacked" color="primary">Name</ion-label>
-        <ion-input type="text" name="title"></ion-input>
+        <ion-input name="name" #name="ngModel" type="text" [(ngModel)]="expenseModel.name"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label position="stacked" color="primary">Ammount</ion-label>
-        <ion-input type="number" name="description"></ion-input>
+        <ion-input name="ammount" #ammount="ngModel" type="number" [(ngModel)]="expenseModel.ammount"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label position="stacked" color="primary">Date</ion-label>
-        <ion-datetime display-format="DD/MM/YYYY"></ion-datetime>
+        <ion-datetime name="date" #date="ngModel" display-format="DD/MM/YYYY" [(ngModel)]="expenseModel.date"></ion-datetime>
     </ion-item>
     <ion-item>
         <ion-label position="stacked" color="primary">Expense Category</ion-label>
-        <ion-select ok-text="Ok" cancel-text="Cancel">
+        <ion-select name="category" #category="ngModel" ok-text="Ok" cancel-text="Cancel" [(ngModel)]="expenseModel.category">
             <ion-select-option *ngFor="let category of categoryList">{{ category.name }}</ion-select-option>
         </ion-select>
     </ion-item>
-    <ion-button color="primary">Add expense</ion-button>
+    <ion-button type="submit" color="primary">Add expense</ion-button>
 </form>

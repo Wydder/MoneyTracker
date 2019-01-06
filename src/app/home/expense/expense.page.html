@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>expense</ion-title>
+    <ion-title>Expense</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <h1>Test</h1>
+    <ion-list #expenseListName>
+        <ion-item-sliding *ngFor="let expense of expenseList">
+            <app-expenseitem (editExpense)="editExpenseFromList($event)" (deleteExpense)="deleteExpenseFromList($event)" [expense]="expense"></app-expenseitem>
+        </ion-item-sliding>
+    </ion-list>
 </ion-content>

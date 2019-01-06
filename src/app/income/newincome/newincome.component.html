@@ -1,3 +1,4 @@
+<!-- Header -->
 <ion-header>
     <ion-toolbar>
         <ion-buttons routerLink="/home/reports" slot="start">
@@ -11,6 +12,8 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
+
+<!-- Content -->
 <ion-content padding>
-    <app-fgincome></app-fgincome>
+    <app-fgincome [incomeModel]="incomeModel" (incomeFormOutput)="saveIncome($event)"></app-fgincome>
 </ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ExpensePage } from './expense.page';
 import { HeaderComponent } from "src/app/home/header/header.component";
+import { ExpenseitemComponent } from './expenseitem/expenseitem.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,6 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [ExpensePage]
+    declarations: [ExpensePage, ExpenseitemComponent]
 })
 export class ExpensePageModule { }

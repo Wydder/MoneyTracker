@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ExpenseapiService } from "src/app/services/expenseapi/expenseapi.service";
+import { Expense } from "src/app/classes/expense";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-newexpense',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewexpenseComponent implements OnInit {
 
-  constructor() { }
+    expenseModel: Expense;
+    expenseApi: ExpenseapiService;
 
-  ngOnInit() {
-  }
+    constructor(public router: Router, expenseApi: ExpenseapiService) {
+        this.expenseModel = new Expense();
+        this.expenseApi = expenseApi;
+    }
+
+    ngOnInit() {
+    }
+
+    saveExpense(expenseModel: Expense) {
+        var post = this.expenseApi.saveExpensePost(expenseModel);
+        post.subscribe(x => {
+            console.log(x);
+            this.router.navigate(['home/expense']);
+        })
+        console.log(this.expenseApi);
+        this.expenseModel = new Expense();
+    }
 
 }
