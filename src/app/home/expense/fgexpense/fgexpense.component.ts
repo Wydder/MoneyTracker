@@ -9,7 +9,7 @@ import { Expense } from "src/app/classes/expense";
     templateUrl: './fgexpense.component.html',
     styleUrls: ['./fgexpense.component.scss']
 })
-export class FgexpenseComponent implements OnInit {
+export class FGexpenseComponent implements OnInit {
 
     // INPUT
     @Input()

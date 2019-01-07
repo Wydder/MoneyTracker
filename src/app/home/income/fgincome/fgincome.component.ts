@@ -5,11 +5,11 @@ import { IncomecategoryService } from 'src/app/services/incomeapi/incomecategory
 import { Income } from "src/app/classes/income";
 
 @Component({
-    selector: 'app-fgincome',
-    templateUrl: './fgincome.component.html',
-    styleUrls: ['./fgincome.component.scss']
+  selector: 'app-fgincome',
+  templateUrl: './fgincome.component.html',
+  styleUrls: ['./fgincome.component.scss']
 })
-export class FgincomeComponent implements OnInit {
+export class FGincomeComponent implements OnInit {
 
     // INPUT
     @Input()
@@ -18,7 +18,7 @@ export class FgincomeComponent implements OnInit {
     // OUTPUT
     @Output()
     incomeFormOutput: EventEmitter<Income> = new EventEmitter();
-    
+
     categoryList: Incomecategory[] = [];
     incomeCategoryApi: IncomecategoryService;
 
@@ -28,7 +28,7 @@ export class FgincomeComponent implements OnInit {
     }
 
     ngOnInit() {
-        
+
     }
 
     logForm() {

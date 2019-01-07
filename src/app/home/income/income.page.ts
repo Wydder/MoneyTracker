@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IncomeapiService } from "src/app/services/incomeapi/incomeapi.service";
 import { Income } from "src/app/classes/income";
-import { List } from '@ionic/angular';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-income',
@@ -12,12 +12,13 @@ export class IncomePage implements OnInit {
 
 
     // work arround bug ionic
-    @ViewChild('incomeListName') incomeListName: List;
+    @ViewChild('incomeListName') incomeListName;
 
     incomeApi: IncomeapiService;
+    income: Income = new Income();
     incomeList: Income[];
 
-    constructor(incomeApi: IncomeapiService) {
+    constructor(public router: Router, incomeApi: IncomeapiService) {
         this.incomeList = [];
         this.incomeApi = incomeApi;
     }
@@ -27,6 +28,7 @@ export class IncomePage implements OnInit {
         console.log(this.incomeList);
     }
 
+    // Populate list
     populateIncomeList(): any {
         if (this.incomeApi) {
             this.incomeApi.getIncomeList().subscribe(response => {
@@ -38,6 +40,19 @@ export class IncomePage implements OnInit {
         }
     }
 
+    // Add Income
+    addIncome(income: Income) {
+        var post = this.incomeApi.saveIncome(income);
+        post.subscribe(x => {
+            console.log(x);
+            console.log(this.router)
+            this.router.navigate(['home/income']);
+        })
+        console.log(this.incomeApi);
+    }
+
+
+    // Delete income
     deleteIncomeFromList(income: Income) {
         this.incomeListName.closeSlidingItems();
         var post = this.incomeApi.deleteIncome(income._id);
@@ -48,6 +63,8 @@ export class IncomePage implements OnInit {
         console.log(this.incomeApi);
     }
 
+
+    // Edit income
     editIncomeFromList(income: Income) {
         this.incomeListName.closeSlidingItems();
         var post = this.incomeApi.editIncomePost(income._id, income);

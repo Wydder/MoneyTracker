@@ -3,7 +3,6 @@ import { Http } from "@angular/http";
 import { ExpenseapiService } from "src/app/services/expenseApi/expenseApi.service";
 import { Income } from "src/app/classes/income";
 import { Expense } from "src/app/classes/expense";
-import { List } from '@ionic/angular';
 
 @Component({
     selector: 'app-expense',
@@ -13,7 +12,7 @@ import { List } from '@ionic/angular';
 export class ExpensePage implements OnInit {
 
     // work arround bug ionic
-    @ViewChild('expenseListName') expenseListName: List;
+    @ViewChild('expenseListName') expenseListName;
 
     expenseApi: ExpenseapiService;
     expenseList: Expense[];

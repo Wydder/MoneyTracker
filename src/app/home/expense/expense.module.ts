@@ -8,11 +8,22 @@ import { IonicModule } from '@ionic/angular';
 import { ExpensePage } from './expense.page';
 import { HeaderComponent } from "src/app/home/header/header.component";
 import { ExpenseitemComponent } from './expenseitem/expenseitem.component';
+import { NewexpenseComponent } from './newexpense/newexpense.component';
+import { EditexpenseComponent } from './editexpense/editexpense.component';
+import { FGexpenseComponent } from './fgexpense/fgexpense.component';
 
 const routes: Routes = [
     {
         path: '',
         component: ExpensePage
+    },
+    {
+        path: 'newexpense',
+        component: NewexpenseComponent
+    },
+    {
+        path: 'editexpense',
+        component: EditexpenseComponent
     }
 ];
 
@@ -23,6 +34,6 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [ExpensePage, ExpenseitemComponent]
+    declarations: [ExpensePage, ExpenseitemComponent, NewexpenseComponent, EditexpenseComponent, FGexpenseComponent]
 })
 export class ExpensePageModule { }

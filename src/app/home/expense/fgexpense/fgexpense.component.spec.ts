@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FgexpenseComponent } from './fgexpense.component';
+import { FGexpenseComponent } from './fgexpense.component';
 
-describe('FgexpenseComponent', () => {
-  let component: FgexpenseComponent;
-  let fixture: ComponentFixture<FgexpenseComponent>;
+describe('FGexpenseComponent', () => {
+  let component: FGexpenseComponent;
+  let fixture: ComponentFixture<FGexpenseComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FgexpenseComponent ]
+      declarations: [ FGexpenseComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FgexpenseComponent);
+    fixture = TestBed.createComponent(FGexpenseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

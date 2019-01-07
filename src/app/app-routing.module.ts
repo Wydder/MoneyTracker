@@ -1,13 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewincomeComponent } from './income/newincome/newincome.component';
-import { FgincomeComponent } from './income/fgincome/fgincome.component';
-import { NewexpenseComponent } from './expense/newexpense/newexpense.component';
 import { HomePage } from "src/app/home/home.page";
-import { IncomelistComponent } from "src/app/income/incomelist/incomelist.component";
-import { ExpenselistComponent } from "src/app/expense/expenselist/expenselist.component";
-import { EditincomeComponent } from "src/app/income/editincome/editincome.component";
-import { EditexpenseComponent } from "src/app/expense/editexpense/editexpense.component";
 
 const routes: Routes = [
     {
@@ -48,35 +41,7 @@ const routes: Routes = [
                 ]
             }
         ]
-    },
-    {
-        path: 'home/income',
-        component: IncomelistComponent
-    },
-    {
-        path: 'home/expense',
-        component: ExpenselistComponent
-    },
-    {
-        path: 'addincome',
-        component: NewincomeComponent
-    },
-    {
-        path: 'addexpense',
-        component: NewexpenseComponent
-    },
-    {
-        path: 'editincome',
-        component: EditincomeComponent
-    },
-    {
-        path: 'editexpense',
-        component: EditexpenseComponent
-    },
-    // Test purpose
-    {
-        path: 'test',        component: FgincomeComponent
-    },
+    }
 ];
 
 @NgModule({

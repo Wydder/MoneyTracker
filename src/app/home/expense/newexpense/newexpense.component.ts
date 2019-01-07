@@ -4,9 +4,9 @@ import { Expense } from "src/app/classes/expense";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-newexpense',
-  templateUrl: './newexpense.component.html',
-  styleUrls: ['./newexpense.component.scss']
+    selector: 'app-newexpense',
+    templateUrl: './newexpense.component.html',
+    styleUrls: ['./newexpense.component.scss']
 })
 export class NewexpenseComponent implements OnInit {
 
