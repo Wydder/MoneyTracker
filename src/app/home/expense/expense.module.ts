@@ -22,7 +22,7 @@ const routes: Routes = [
         component: NewexpenseComponent
     },
     {
-        path: 'editexpense',
+        path: 'editexpense/:id',
         component: EditexpenseComponent
     }
 ];

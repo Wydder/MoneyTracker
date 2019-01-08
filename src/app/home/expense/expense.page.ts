@@ -27,6 +27,7 @@ export class ExpensePage implements OnInit {
         console.log(this.expenseList);
     }
 
+    // Populate list
     populateExpenseList(): any {
         if (this.expenseApi) {
             this.expenseApi.getExpenseList().subscribe(response => {
@@ -38,6 +39,12 @@ export class ExpensePage implements OnInit {
         }
     }
 
+    // Add expense
+    onAddExpense(expense: Expense) {
+        this.populateExpenseList();
+    }
+
+    // Delete expense
     deleteExpenseFromList(expense: Expense) {
         this.expenseListName.closeSlidingItems();
         var post = this.expenseApi.deleteExpense(expense._id);
@@ -46,6 +53,12 @@ export class ExpensePage implements OnInit {
             this.populateExpenseList();
         })
         console.log(this.expenseApi);
+    }
+
+    // Edit expense
+    editExpenseFromList(expense: Expense) {
+        this.expenseListName.closeSlidingItems();
+        this.populateExpenseList();
     }
 
 }

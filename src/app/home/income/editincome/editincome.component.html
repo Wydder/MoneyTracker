@@ -1,1 +1,20 @@
-<app-fgincome [incomeModel]="income" (incomeFormOutput)="editIncome($event)"></app-fgincome>
+<!-- Header -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons routerLink="/home/reports" slot="start">
+            <ion-button color="primary" fill="solid">
+                <ion-icon slot="start" name="arrow-back"></ion-icon>
+                Back
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Add income
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<!-- Content -->
+<ion-content padding>
+    <app-fgincome [incomeModel]="income" (incomeFormOutput)="editIncome($event)"></app-fgincome>
+</ion-content>
+

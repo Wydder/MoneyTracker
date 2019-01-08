@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Expense } from "src/app/classes/expense";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-expenseitem',
@@ -14,23 +15,25 @@ export class ExpenseitemComponent implements OnInit {
 
     // Output
     @Output()
-    deleteExpense: EventEmitter<Expense> = new EventEmitter();
-    editExpense: EventEmitter<Expense> = new EventEmitter();
+    deleteExpenseOutput: EventEmitter<Expense> = new EventEmitter();
+    editExpenseOutput: EventEmitter<Expense> = new EventEmitter();
 
 
-    constructor() { }
+    constructor(public router: Router) { }
 
     ngOnInit() {
     }
 
     deleteExpenseEmitter() {
-        this.deleteExpense.emit(this.expense);
+        this.deleteExpenseOutput.emit(this.expense);
     }
 
-    editExpenseEmitter() {
+    editExpenseEmitter(expense: Expense) {
         console.log('this should edit');
-        this.editExpense.emit(this.expense);
+        //this.editExpenseOutput.emit(this.expense);
+        this.router.navigate(['home/expense/editexpense/' + expense._id]);
     }
+    
 
 
 }

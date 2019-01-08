@@ -11,11 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NewexpenseComponent } from './expense/newexpense/newexpense.component';
-import { EditexpenseComponent } from './expense/editexpense/editexpense.component';
-import { FgexpenseComponent } from './expense/fgexpense/fgexpense.component';
 import { HomePage } from "src/app/home/home.page";
-import { ExpenselistComponent } from './expense/expenselist/expenselist.component';
 import { HeaderComponent } from "src/app/home/header/header.component";
 import { TabsComponent } from "src/app/home/tabs/tabs.component";
 import { AddnewbtnComponent } from "src/app/home/addnewbtn/addnewbtn.component";

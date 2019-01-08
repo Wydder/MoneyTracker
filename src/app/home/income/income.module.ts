@@ -21,7 +21,7 @@ const routes: Routes = [
         component: NewincomeComponent
     },
     {
-        path: 'editincome',
+        path: 'editincome/:id',
         component: EditincomeComponent
     }
 ];

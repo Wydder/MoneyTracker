@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Income } from "src/app/classes/income";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-incomeitem',
@@ -14,22 +15,23 @@ export class IncomeitemComponent implements OnInit {
 
     // Output
     @Output()
-    deleteIncome: EventEmitter<Income> = new EventEmitter();
-    editIncome: EventEmitter<Income> = new EventEmitter();
+    deleteIncomeOutput: EventEmitter<Income> = new EventEmitter();
+    editIncomeOutput: EventEmitter<Income> = new EventEmitter();
 
 
-    constructor() { }
+    constructor(public router: Router) { }
 
     ngOnInit() {
     }
 
     deleteIncomeEmitter() {
-        this.deleteIncome.emit(this.income);
+        this.deleteIncomeOutput.emit(this.income);
     }
 
-    editIncomeEmitter() {
+    editIncomeEmitter(income: Income) {
         console.log('this should edit');
-        this.editIncome.emit(this.income);
+        this.router.navigate(['home/income/editincome/' + income._id]);
     }
+
 
 }

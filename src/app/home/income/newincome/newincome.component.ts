@@ -11,7 +11,7 @@ import { Income } from "src/app/classes/income";
 export class NewincomeComponent implements OnInit {
 
     @Output()
-    onAddIncome: EventEmitter<Income> = new EventEmitter();
+    onAddIncomeOutput: EventEmitter<Income> = new EventEmitter();
 
     incomeModel: Income;
     incomeApi: IncomeapiService;
@@ -26,10 +26,13 @@ export class NewincomeComponent implements OnInit {
     }
 
     saveIncome(incomeModel: Income) {
-        console.log(this.incomeModel);
-        this.onAddIncome.emit(this.incomeModel);
-        this.router.navigate(['home/expense']);
-        this.incomeModel = new Income();
+        this.onAddIncomeOutput.emit(this.incomeModel);
+        var post = this.incomeApi.saveIncome(incomeModel);
+        post.subscribe(x => {
+            console.log(x);
+            this.router.navigate(['home/income']);
+            this.incomeModel = new Income();
+        })
     }
 
 }

@@ -1,3 +1,18 @@
-<p>
-  editexpense works!
-</p>
+<!-- Header -->
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons routerLink="/home/reports" slot="start">
+            <ion-button fill="solid" color="primary">
+                <ion-icon slot="start" name="arrow-back"></ion-icon>
+                Back
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            Add expense
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<!-- Content -->
+<ion-content padding>
+    <app-fgexpense [expenseModel]="expense" (expenseFormOutput)="editExpense($event)"></app-fgexpense>
+</ion-content>

@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Income } from "src/app/classes/income";
 import { IncomeapiService } from "src/app/services/incomeapi/incomeapi.service";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-editincome',
@@ -10,22 +10,25 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditincomeComponent implements OnInit {
 
+    @Output()
+    onEditIncomeOutput: EventEmitter<Income> = new EventEmitter();
+
     income: Income;
     incomeApi: IncomeapiService;
     id: string;
 
 
-    constructor(incomeApi: IncomeapiService, private route: ActivatedRoute) {
+    constructor(incomeApi: IncomeapiService, public router: Router, private route: ActivatedRoute) {
         this.incomeApi = incomeApi;
         this.id = this.route.snapshot.paramMap.get('id');
         console.log(this.id);
-        this.getCar();
+        this.getIncome();
     }
 
     ngOnInit() {
     }
 
-    getCar() {
+    getIncome() {
         this.incomeApi.getIncomeData(this.id).subscribe(x => {
             console.log(x)
             this.income = x;
@@ -33,9 +36,11 @@ export class EditincomeComponent implements OnInit {
     }
 
     editIncome(income: Income) {
+        this.onEditIncomeOutput.emit(this.income);
         this.incomeApi.editIncomePost(this.id, income).subscribe(x => {
             console.log(x);
-            this.getCar();
+            this.getIncome();
+            this.router.navigate(['home/income']);
         });
     }
 

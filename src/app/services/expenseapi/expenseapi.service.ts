@@ -38,4 +38,15 @@ export class ExpenseapiService {
     deleteExpense(id: string): Observable<Response> {
         return this.http.delete(this.urlExpenseList + '/' + id, { headers: this.headers });
     }
+
+    getExpenseData(id: string) {
+        var responseObservable = map((response: Response) => {
+            return response.json();
+        });
+        return responseObservable(this.http.get(this.urlExpenseList + '/' + id, { headers: this.headers }))
+    }
+
+    editExpensePost(id: string, expense: Expense) {
+        return this.http.put(this.urlExpenseList + '/' + id, expense, { headers: this.headers });
+    }
 }

@@ -42,13 +42,7 @@ export class IncomePage implements OnInit {
 
     // Add Income
     addIncome(income: Income) {
-        var post = this.incomeApi.saveIncome(income);
-        post.subscribe(x => {
-            console.log(x);
-            console.log(this.router)
-            this.router.navigate(['home/income']);
-        })
-        console.log(this.incomeApi);
+        this.populateIncomeList();        
     }
 
 
@@ -67,12 +61,7 @@ export class IncomePage implements OnInit {
     // Edit income
     editIncomeFromList(income: Income) {
         this.incomeListName.closeSlidingItems();
-        var post = this.incomeApi.editIncomePost(income._id, income);
-        post.subscribe(x => {
-            console.log(x);
-            this.populateIncomeList();
-        })
-        console.log(this.incomeApi);
+        this.populateIncomeList();
     }
 
 }

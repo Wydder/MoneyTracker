@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ExpenseapiService } from "src/app/services/expenseapi/expenseapi.service";
 import { Expense } from "src/app/classes/expense";
 import { Router } from "@angular/router";
@@ -9,6 +9,10 @@ import { Router } from "@angular/router";
     styleUrls: ['./newexpense.component.scss']
 })
 export class NewexpenseComponent implements OnInit {
+
+    @Output()
+    onAddExpenseOutput: EventEmitter<Expense> = new EventEmitter();
+
 
     expenseModel: Expense;
     expenseApi: ExpenseapiService;
@@ -22,12 +26,12 @@ export class NewexpenseComponent implements OnInit {
     }
 
     saveExpense(expenseModel: Expense) {
+        this.onAddExpenseOutput.emit(this.expenseModel);
         var post = this.expenseApi.saveExpensePost(expenseModel);
         post.subscribe(x => {
             console.log(x);
             this.router.navigate(['home/expense']);
-        })
-        console.log(this.expenseApi);
+        });
         this.expenseModel = new Expense();
     }
 

@@ -7,7 +7,7 @@
 <ion-content padding>
     <ion-list #expenseListName>
         <ion-item-sliding *ngFor="let expense of expenseList">
-            <app-expenseitem (editExpense)="editExpenseFromList($event)" (deleteExpense)="deleteExpenseFromList($event)" [expense]="expense"></app-expenseitem>
+            <app-expenseitem (onEditExpenseOutput)="editExpenseFromList($event)" (onAddExpenseOutput)="onAddExpense($event)" (deleteExpenseOutput)="deleteExpenseFromList($event)" [expense]="expense"></app-expenseitem>
         </ion-item-sliding>
     </ion-list>
 </ion-content>
