@@ -15,6 +15,9 @@ export class FGexpenseComponent implements OnInit {
     @Input()
     expenseModel: Expense;
 
+    @Input()
+    submitLabel: string;
+
     // OUTPUT
     @Output()
     expenseFormOutput: EventEmitter<Expense> = new EventEmitter();

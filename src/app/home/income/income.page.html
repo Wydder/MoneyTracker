@@ -6,7 +6,7 @@
 <ion-content padding>
     <ion-list #incomeListName>
         <ion-item-sliding *ngFor="let income of incomeList">
-            <app-incomeitem (onAddIncomeOutput)="addIncome($event)" (editIncome)="editIncomeFromList($event)" (deleteIncomeOutput)="deleteIncomeFromList($event)" [income]="income"></app-incomeitem>
+            <app-incomeitem (onAddIncomeOutput)="addIncome($event)" (onEditIncomeOutput)="editIncomeFromList($event)" (deleteIncomeOutput)="deleteIncomeFromList($event)" [income]="income"></app-incomeitem>
         </ion-item-sliding>
     </ion-list>
 </ion-content>

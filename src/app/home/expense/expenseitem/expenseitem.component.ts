@@ -16,7 +16,6 @@ export class ExpenseitemComponent implements OnInit {
     // Output
     @Output()
     deleteExpenseOutput: EventEmitter<Expense> = new EventEmitter();
-    editExpenseOutput: EventEmitter<Expense> = new EventEmitter();
 
 
     constructor(public router: Router) { }
@@ -30,7 +29,6 @@ export class ExpenseitemComponent implements OnInit {
 
     editExpenseEmitter(expense: Expense) {
         console.log('this should edit');
-        //this.editExpenseOutput.emit(this.expense);
         this.router.navigate(['home/expense/editexpense/' + expense._id]);
     }
     

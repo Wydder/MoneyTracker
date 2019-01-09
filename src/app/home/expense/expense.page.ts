@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http } from "@angular/http";
 import { ExpenseapiService } from "src/app/services/expenseApi/expenseApi.service";
-import { Income } from "src/app/classes/income";
 import { Expense } from "src/app/classes/expense";
 
 @Component({
@@ -23,8 +22,11 @@ export class ExpensePage implements OnInit {
     }
 
     ngOnInit() {
+    }
+
+    ionViewWillEnter() {
+        this.expenseListName.closeSlidingItems();
         this.populateExpenseList();
-        console.log(this.expenseList);
     }
 
     // Populate list

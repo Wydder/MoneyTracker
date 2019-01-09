@@ -14,8 +14,8 @@
     <ion-item>
         <ion-label position="stacked" color="primary">Income Category</ion-label>
         <ion-select name="category" #category="ngModel" ok-text="Ok" cancel-text="Cancel" [(ngModel)]="incomeModel.category">
-            <ion-select-option *ngFor="let category of categoryList">{{ category.name }}</ion-select-option>
+            <ion-select-option *ngFor="let category of categoryList" [value]="category">{{ category.name }}</ion-select-option>
         </ion-select>
     </ion-item>
-    <ion-button type="submit" color="primary">Add income</ion-button>
+    <ion-button type="submit" color="primary">{{ submitLabel }}</ion-button>
 </form>

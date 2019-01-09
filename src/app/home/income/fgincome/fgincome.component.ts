@@ -15,6 +15,9 @@ export class FGincomeComponent implements OnInit {
     @Input()
     incomeModel: Income;
 
+    @Input()
+    submitLabel: string;
+    
     // OUTPUT
     @Output()
     incomeFormOutput: EventEmitter<Income> = new EventEmitter();
@@ -37,10 +40,16 @@ export class FGincomeComponent implements OnInit {
     }
 
     getIncomeCategoryList() {
+        
         if (this.incomeCategoryApi) {
             this.incomeCategoryApi.getExpenseCategory().subscribe(response => {
                 console.log(response)
                 this.categoryList = response;
+                if(this.incomeModel.category) {
+                    var index = this.categoryList.find(x => x.name == this.incomeModel.category.name);
+                    this.incomeModel.category = index;
+                    console.log(index);
+                }
             })
         }
     }

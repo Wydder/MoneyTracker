@@ -28,6 +28,11 @@ export class IncomePage implements OnInit {
         console.log(this.incomeList);
     }
 
+    ionViewWillEnter() {
+        this.incomeListName.closeSlidingItems();
+        this.populateIncomeList();
+    }
+
     // Populate list
     populateIncomeList(): any {
         if (this.incomeApi) {
