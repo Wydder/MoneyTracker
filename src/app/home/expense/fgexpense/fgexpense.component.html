@@ -13,8 +13,8 @@
     </ion-item>
     <ion-item>
         <ion-label position="stacked" color="primary">Expense Category</ion-label>
-        <ion-select name="category" #category="ngModel" ok-text="Ok" cancel-text="Cancel" [(ngModel)]="expenseModel.category.name">
-            <ion-select-option *ngFor="let category of categoryList">{{ category.name }}</ion-select-option>
+        <ion-select name="category" #category="ngModel" ok-text="Ok" cancel-text="Cancel" [(ngModel)]="expenseModel.category">
+            <ion-select-option *ngFor="let category of categoryList" [value]="category">{{ category.name }}</ion-select-option>
         </ion-select>
     </ion-item>
     <ion-button type="submit" color="primary">{{ submitLabel }}</ion-button>

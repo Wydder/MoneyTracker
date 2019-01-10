@@ -1,10 +1,38 @@
+<!-- Header -->
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Expense</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons routerLink="/home/expense" slot="start">
+            <ion-button fill="solid" color="primary">
+                <ion-icon slot="start" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-item>
+            <ion-label>Toggle for {{ chartMode == true ? toggleLabelChart : toggleLabelList }}</ion-label>
+            <ion-toggle [(ngModel)]="chartMode"></ion-toggle>
+        </ion-item>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content [hidden]="chartMode" padding>
+    <ion-card>
+        <ion-card-header>
+            Bar Chart
+        </ion-card-header>
+        <ion-card-content>
+            <canvas #barCanvas></canvas>
+        </ion-card-content>
+    </ion-card>
+
+    <!--<ion-card [hidden]="!barChartMode">
+        <ion-card-header>
+            Doughnut Chart
+        </ion-card-header>
+        <ion-card-content>
+            <canvas #doughnutCanvas></canvas>
+        </ion-card-content>
+    </ion-card>-->
+</ion-content>
+<ion-content [hidden]="!chartMode" padding>
     <ion-list #expenseListName>
         <ion-item-sliding *ngFor="let expense of expenseList">
             <app-expenseitem (onEditExpenseOutput)="editExpenseFromList($event)" (onAddExpenseOutput)="onAddExpense($event)" (deleteExpenseOutput)="deleteExpenseFromList($event)" [expense]="expense"></app-expenseitem>
