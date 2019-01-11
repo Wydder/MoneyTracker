@@ -176,7 +176,7 @@ export class ExpensePage implements OnInit {
         var result = [];
         x.reduce(function (res, value) {
             if (!res[value.category.name] && !res[value.category.backgroundColor] && !res[value.category.borderColor]) {
-                res[value.category.name] = { Name: value.category.name, total: 0, backgroundColor: value.category.backgroundColor, borderColor: value.category.borderColor, borderWidth: value.category.borderWidth, total: 0 };
+                res[value.category.name] = { name: value.category.name, total: 0, backgroundColor: value.category.backgroundColor, borderColor: value.category.borderColor, borderWidth: value.category.borderWidth };
                 result.push(res[value.category.name])
             }
             res[value.category.name].total += value.ammount;
@@ -186,8 +186,8 @@ export class ExpensePage implements OnInit {
 
         // Push info so chart can understand
         for (var i = 0; result.length > i; i++) {
-            if (x[i].name) {
-                listNames.push(result[i].Name);
+            if (result[i].name) {
+                listNames.push(result[i].name);
                 listBackgroundColor.push(result[i].backgroundColor);
                 listBorderColor.push(result[i].borderColor);
                 borderWidth = result[i].borderWidth;
