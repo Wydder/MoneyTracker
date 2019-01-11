@@ -1,15 +1,11 @@
 <!-- Header -->
 <ion-header>
     <ion-toolbar>
-        <ion-buttons routerLink="/home/expense" slot="start">
-            <ion-button fill="solid" color="primary">
-                <ion-icon slot="start" name="arrow-back"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-        <ion-item>
+        <ion-title>
             <ion-label>Toggle for {{ chartMode == true ? toggleLabelChart : toggleLabelList }}</ion-label>
-            <ion-toggle [(ngModel)]="chartMode"></ion-toggle>
-        </ion-item>
+            
+        </ion-title>
+        <ion-toggle [(ngModel)]="chartMode"></ion-toggle>
     </ion-toolbar>
 </ion-header>
 

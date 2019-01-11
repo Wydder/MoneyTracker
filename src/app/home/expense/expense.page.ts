@@ -3,6 +3,8 @@ import { Http } from "@angular/http";
 import { ExpenseapiService } from "src/app/services/expenseApi/expenseApi.service";
 import { Expense } from "src/app/classes/expense";
 import { Chart } from 'chart.js';
+import { Chartvar } from "src/app/classes/chartvar";
+import { ExpensecategoryService } from "src/app/services/expenseapi/expensecategory.service";
 
 @Component({
     selector: 'app-expense',
@@ -26,7 +28,18 @@ export class ExpensePage implements OnInit {
     // Canvas
     //@ViewChild('barCanvas') barCanvas;
 
+
+    /**
+     * Services
+     */
+    expenseCategoryApi: ExpensecategoryService;
     expenseApi: ExpenseapiService;
+
+
+    /**
+     * Variables
+     */
+
     expenseList: Expense[];
     chartMode: boolean = false;
     barChart: any;
@@ -36,6 +49,7 @@ export class ExpensePage implements OnInit {
     toggleLabelList: string = "list";
     barChartMode: boolean = true;
     categoryListNames: string[] = [];
+    chartVar: Chartvar = new Chartvar();
 
     constructor(expenseApi: ExpenseapiService) {
         this.expenseList = [];
@@ -48,7 +62,6 @@ export class ExpensePage implements OnInit {
     ionViewWillEnter() {
         this.expenseListName.closeSlidingItems();
         this.populateExpenseList();
-        this.chartModeFunction(this.categoryListNames);
     }
 
     ngAfterViewInit() {
@@ -62,6 +75,7 @@ export class ExpensePage implements OnInit {
                 console.log(response)
                 this.expenseList = response;
                 this.getExpenseListNames(this.expenseList);
+                this.chartModeFunction(this.chartVar);
             })
         } else {
             console.log('Response is not defined')
@@ -91,34 +105,18 @@ export class ExpensePage implements OnInit {
     }
 
     // Chart mode
-    chartModeFunction(labels) {
+    chartModeFunction(chartVar: Chartvar) {
         if (this.barChartMode) {
             this.justChart = new Chart(this.barCanvas.nativeElement, {
                 type: 'bar',
                 data: {
-                    labels: labels,
+                    labels: chartVar.name,
                     datasets: [{
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3, 5],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(255,99,132,1)',
-                        ],
-                        borderWidth: 1
+                        label: '# of expense',
+                        data: chartVar.totalAmmount,
+                        backgroundColor: chartVar.backgroundColor,
+                        borderColor: chartVar.borderColor,
+                        borderWidth: chartVar.borderWidth
                     }]
                 },
                 options: {
@@ -168,14 +166,39 @@ export class ExpensePage implements OnInit {
     // get expense list names to add in chart
     getExpenseListNames(list) {
         var x = list;
-        var me = this;
         var listNames = [];
+        var listBackgroundColor = [];
+        var listBorderColor = [];
+        var totalAmmount = [];
+        var borderWidth      
 
-        for (var i = 0; x.length > i; i++) {
-            console.log(x[i].name);
-            listNames.push(x[i].name);
-            console.log(listNames);
+        // Group by expense category
+        var result = [];
+        x.reduce(function (res, value) {
+            if (!res[value.category.name] && !res[value.category.backgroundColor] && !res[value.category.borderColor]) {
+                res[value.category.name] = { Name: value.category.name, total: 0, backgroundColor: value.category.backgroundColor, borderColor: value.category.borderColor, borderWidth: value.category.borderWidth, total: 0 };
+                result.push(res[value.category.name])
+            }
+            res[value.category.name].total += value.ammount;
+            return res;
+        }, {});
+        console.log(result);
+
+        // Push info so chart can understand
+        for (var i = 0; result.length > i; i++) {
+            if (x[i].name) {
+                listNames.push(result[i].Name);
+                listBackgroundColor.push(result[i].backgroundColor);
+                listBorderColor.push(result[i].borderColor);
+                borderWidth = result[i].borderWidth;
+                totalAmmount.push(result[i].total);
+            }
         }
-        this.categoryListNames = listNames;
+        this.chartVar.name = listNames;
+        this.chartVar.backgroundColor = listBackgroundColor;
+        this.chartVar.borderColor = listBorderColor;
+        this.chartVar.borderWidth = borderWidth;
+        this.chartVar.totalAmmount = totalAmmount;
+        console.log(this.chartVar);
     }
 }
