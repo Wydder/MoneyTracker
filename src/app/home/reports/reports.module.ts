@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ReportsPage } from './reports.page';
 import { HeaderComponent } from "src/app/home/header/header.component";
+import { ChartModule } from "src/app/charts/chart.module";
 
 const routes: Routes = [
     {
@@ -21,7 +22,8 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         IonicModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        ChartModule
     ],
     declarations: [ReportsPage]
 })

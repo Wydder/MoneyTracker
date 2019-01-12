@@ -32,8 +32,11 @@ export class ExpensePage implements OnInit {
     categoryListNames: string[] = [];
     chartVar: Chartvar = new Chartvar();
     chartType: boolean = false;
+    startDate: string;
+    endDate: string;
+    listIsReady: boolean;
 
-    constructor( private expenseApi: ExpenseapiService, private chartService: ChartBuilderService) {
+    constructor(private expenseApi: ExpenseapiService, private chartService: ChartBuilderService) {
         this.expenseList = [];
     }
 
@@ -56,8 +59,23 @@ export class ExpensePage implements OnInit {
                 console.log(response)
                 this.expenseList = response;
                 this.chartVar = this.chartService.getChartData(this.expenseList);
+                this.listIsReady = true;
                 console.log(this.chartVar);
                 
+            })
+        } else {
+            console.log('Response is not defined')
+        }
+    }
+
+    populateExpenseListQ(): any {
+        if (this.expenseApi) {
+            this.expenseApi.getDataByDate(this.startDate, this.endDate).subscribe(response => {
+                console.log(response)
+                this.expenseList = response;
+                this.chartVar = this.chartService.getChartData(this.expenseList);
+                this.listIsReady = true;
+                console.log(this.chartVar);
             })
         } else {
             console.log('Response is not defined')

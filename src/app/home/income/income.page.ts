@@ -31,6 +31,9 @@ export class IncomePage implements OnInit {
     categoryListNames: string[] = [];
     chartVar: Chartvar = new Chartvar();
     chartType: boolean = false;
+    startDate: string;
+    endDate: string;
+    listIsReady: boolean;
 
     constructor(public router: Router, private incomeApi: IncomeapiService,  private chartService: ChartBuilderService) {
         this.incomeList = [];
@@ -53,12 +56,29 @@ export class IncomePage implements OnInit {
                 console.log(response)
                 this.incomeList = response;
                 this.chartVar = this.chartService.getChartData(this.incomeList);
+                this.listIsReady = true;
                 console.log(this.chartVar);
             })
         } else {
             console.log('Response is not defined')
         }
     }
+
+    populateIncomeListQ(): any {
+        if (this.incomeApi) {
+            this.incomeApi.getDataByDate(this.startDate, this.endDate).subscribe(response => {
+                console.log(response)
+                this.incomeList = response;
+                this.chartVar = this.chartService.getChartData(this.incomeList);
+                this.listIsReady = true;
+                console.log(this.chartVar);
+            })
+        } else {
+            console.log('Response is not defined')
+        }
+    }
+
+
 
     // Add Income
     addIncome(income: Income) {

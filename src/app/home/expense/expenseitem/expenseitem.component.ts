@@ -23,7 +23,7 @@ export class ExpenseitemComponent implements OnInit {
     ngOnInit() {
     }
 
-    deleteExpenseEmitter() {
+    deleteExpenseEmitter(expense: Expense) {
         this.deleteExpenseOutput.emit(this.expense);
     }
 

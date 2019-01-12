@@ -24,7 +24,7 @@ export class IncomeitemComponent implements OnInit {
     ngOnInit() {
     }
 
-    deleteIncomeEmitter() {
+    deleteIncomeEmitter(income: Income) {
         this.deleteIncomeOutput.emit(this.income);
     }
 

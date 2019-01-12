@@ -2,9 +2,32 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>
-            <ion-label>Toggle for {{ chartMode == true ? toggleLabelList : toggleLabelChart }}</ion-label>
+            <ion-item>
+                <ion-toggle [(ngModel)]="chartMode"></ion-toggle>
+                <ion-label>Toggle for {{ chartMode == true ? toggleLabelList : toggleLabelChart }}</ion-label>
+            </ion-item>
         </ion-title>
-        <ion-toggle [(ngModel)]="chartMode"></ion-toggle>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-grid>
+            <ion-row>
+                <ion-col size="5">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">Start date</ion-label>
+                        <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="startDate"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="5">
+                    <ion-item>
+                        <ion-label position="stacked" color="primary">End date</ion-label>
+                        <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="endDate"></ion-datetime>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="2">
+                    <ion-button class="srcBtn" (click)="populateExpenseListQ()" color="primary"><ion-icon name="search"></ion-icon></ion-button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-toolbar>
 </ion-header>
 
