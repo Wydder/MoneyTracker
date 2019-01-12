@@ -10,6 +10,7 @@ import { IncomeitemComponent } from './incomeitem/incomeitem.component';
 import { NewincomeComponent } from './newincome/newincome.component';
 import { EditincomeComponent } from './editincome/editincome.component';
 import { FGincomeComponent } from './fgincome/fgincome.component';
+import { ChartModule } from 'src/app/charts/chart.module';
 
 const routes: Routes = [
     {
@@ -31,7 +32,8 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         IonicModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        ChartModule
     ],
     declarations: [IncomePage, IncomeitemComponent, NewincomeComponent, EditincomeComponent, FGincomeComponent]
 })

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IncomeapiService } from "src/app/services/incomeapi/incomeapi.service";
 import { Income } from "src/app/classes/income";
 import { Router } from "@angular/router";
+import { Chartvar } from 'src/app/classes/chartvar';
+import { ChartBuilderService } from 'src/app/charts/services/chart-builder.service';
 
 @Component({
   selector: 'app-income',
@@ -14,13 +16,24 @@ export class IncomePage implements OnInit {
     // work arround bug ionic
     @ViewChild('incomeListName') incomeListName;
 
-    incomeApi: IncomeapiService;
     income: Income = new Income();
+    
+    
+    /**
+     * Variables
+    **/    
     incomeList: Income[];
+    chartMode: boolean = false;
+    doughnutChart: any;
+    toggleLabelChart: string = "chart";
+    toggleLabelList: string = "list";
+    barChartMode: boolean = true;
+    categoryListNames: string[] = [];
+    chartVar: Chartvar = new Chartvar();
+    chartType: boolean = false;
 
-    constructor(public router: Router, incomeApi: IncomeapiService) {
+    constructor(public router: Router, private incomeApi: IncomeapiService,  private chartService: ChartBuilderService) {
         this.incomeList = [];
-        this.incomeApi = incomeApi;
     }
 
     ngOnInit() {
@@ -39,6 +52,8 @@ export class IncomePage implements OnInit {
             this.incomeApi.getIncomeList().subscribe(response => {
                 console.log(response)
                 this.incomeList = response;
+                this.chartVar = this.chartService.getChartData(this.incomeList);
+                console.log(this.chartVar);
             })
         } else {
             console.log('Response is not defined')

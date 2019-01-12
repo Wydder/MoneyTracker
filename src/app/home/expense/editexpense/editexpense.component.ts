@@ -37,7 +37,6 @@ export class EditexpenseComponent implements OnInit {
 
     editExpense(expense: Expense) {
         this.expenseApi.editExpensePost(this.id, expense).subscribe(x => {
-            console.log(x);
             this.getExpense();
             this.router.navigate(['home/expense']);
             this.onEditExpenseOutput.emit(this.expense);

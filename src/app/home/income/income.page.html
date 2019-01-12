@@ -1,12 +1,24 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Income</ion-title>
+        <ion-title>
+            <ion-label>Toggle for {{ chartMode == true ? toggleLabelList : toggleLabelChart }}</ion-label>
+        </ion-title>
+        <ion-toggle [(ngModel)]="chartMode"></ion-toggle>
     </ion-toolbar>
 </ion-header>
-<ion-content padding>
+<ion-content *ngIf="chartMode" padding>
+    <ion-item>
+        <ion-toggle [(ngModel)]="chartType"></ion-toggle>
+        <ion-label>Change chart type</ion-label>
+    </ion-item>
+    <app-bar-chart *ngIf="chartType" [chartVar]="chartVar"></app-bar-chart>
+    <app-doughnut-chart *ngIf="!chartType" [chartVar]="chartVar"></app-doughnut-chart>
+</ion-content>
+<ion-content [hidden]="chartMode" padding>
     <ion-list #incomeListName>
         <ion-item-sliding *ngFor="let income of incomeList">
-            <app-incomeitem (onAddIncomeOutput)="addIncome($event)" (onEditIncomeOutput)="editIncomeFromList($event)" (deleteIncomeOutput)="deleteIncomeFromList($event)" [income]="income"></app-incomeitem>
+            <app-incomeitem (onAddIncomeOutput)="addIncome($event)" (onEditIncomeOutput)="editIncomeFromList($event)"
+                (deleteIncomeOutput)="deleteIncomeFromList($event)" [income]="income"></app-incomeitem>
         </ion-item-sliding>
     </ion-list>
 </ion-content>

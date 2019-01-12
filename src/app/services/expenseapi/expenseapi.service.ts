@@ -49,4 +49,12 @@ export class ExpenseapiService {
     editExpensePost(id: string, expense: Expense) {
         return this.http.put(this.urlExpenseList + '/' + id, expense, { headers: this.headers });
     }
+
+    getDataByDate(startDate: Date, endDate: Date) {
+        var queryUrl = this.urlExpenseList + '?q={"date":{"$gt":{"$date":"' + startDate +'"},"$lt":{"$date":"' + endDate +'"}}}'
+        var responseObservable = map((response: Response) => {
+            return response.json();
+        });
+        return responseObservable(this.http.get(queryUrl, { headers: this.headers }))
+    }
 }
