@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ExpensePage } from './expense.page';
-import { HeaderComponent } from "src/app/home/header/header.component";
 import { ExpenseitemComponent } from './expenseitem/expenseitem.component';
 import { NewexpenseComponent } from './newexpense/newexpense.component';
 import { EditexpenseComponent } from './editexpense/editexpense.component';

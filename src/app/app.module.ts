@@ -12,7 +12,6 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomePage } from "src/app/home/home.page";
-import { HeaderComponent } from "src/app/home/header/header.component";
 import { TabsComponent } from "src/app/home/tabs/tabs.component";
 import { AddnewbtnComponent } from "src/app/home/addnewbtn/addnewbtn.component";
 
