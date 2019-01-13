@@ -12,6 +12,8 @@ import { NewexpenseComponent } from './newexpense/newexpense.component';
 import { EditexpenseComponent } from './editexpense/editexpense.component';
 import { FGexpenseComponent } from './fgexpense/fgexpense.component';
 import { ChartModule } from 'src/app/charts/chart.module';
+import { HomePageModule } from "src/app/home/home.module";
+import { CommonComponentsModule } from "src/app/common-components/common-components.module";
 
 const routes: Routes = [
     {
@@ -34,7 +36,8 @@ const routes: Routes = [
         FormsModule,
         IonicModule,
         RouterModule.forChild(routes),        
-        ChartModule
+        ChartModule,
+        CommonComponentsModule
     ],
     declarations: [ExpensePage, ExpenseitemComponent, NewexpenseComponent, EditexpenseComponent, FGexpenseComponent]
 })

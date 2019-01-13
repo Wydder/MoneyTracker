@@ -4,6 +4,7 @@ import { Expense } from "src/app/classes/expense";
 import { Chartvar } from "src/app/classes/chartvar";
 import { ExpensecategoryService } from "src/app/services/expenseapi/expensecategory.service";
 import { ChartBuilderService } from 'src/app/charts/services/chart-builder.service';
+import { Dateform } from "src/app/classes/dateform";
 
 @Component({
     selector: 'app-expense',
@@ -24,19 +25,19 @@ export class ExpensePage implements OnInit {
     **/
 
     expenseList: Expense[];
-    chartMode: boolean = false;
+    chartMode: boolean = true;
     doughnutChart: any;
     toggleLabelChart: string = "chart";
     toggleLabelList: string = "list";
-    barChartMode: boolean = true;
     categoryListNames: string[] = [];
     chartVar: Chartvar = new Chartvar();
     chartType: boolean = false;
-    startDate: string;
-    endDate: string;
     listIsReady: boolean;
+    title: string;
+    dateForm: Dateform;
 
     constructor(private expenseApi: ExpenseapiService, private chartService: ChartBuilderService) {
+        this.title = "Expense list"
         this.expenseList = [];
     }
 
@@ -44,6 +45,7 @@ export class ExpensePage implements OnInit {
     }
 
     ionViewWillEnter() {
+        this.dateForm = new Dateform();
         this.expenseListName.closeSlidingItems();
         this.populateExpenseList();
     }
@@ -68,9 +70,9 @@ export class ExpensePage implements OnInit {
         }
     }
 
-    populateExpenseListQ(): any {
+    populateExpenseListQ(dateForm: Dateform): any {
         if (this.expenseApi) {
-            this.expenseApi.getDataByDate(this.startDate, this.endDate).subscribe(response => {
+            this.expenseApi.getDataByDate(dateForm.startDate, dateForm.endDate).subscribe(response => {
                 console.log(response)
                 this.expenseList = response;
                 this.chartVar = this.chartService.getChartData(this.expenseList);
@@ -102,5 +104,9 @@ export class ExpensePage implements OnInit {
     editExpenseFromList(expense: Expense) {
         this.expenseListName.closeSlidingItems();
         this.populateExpenseList();
+    }
+
+    chartModeListener(chartModeOn: boolean) {  
+        this.chartMode = chartModeOn
     }
 }

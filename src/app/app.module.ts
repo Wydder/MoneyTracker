@@ -17,10 +17,10 @@ import { TabsComponent } from "src/app/home/tabs/tabs.component";
 import { AddnewbtnComponent } from "src/app/home/addnewbtn/addnewbtn.component";
 
 @NgModule({
-    declarations: [AppComponent, HomePage, HeaderComponent, TabsComponent, AddnewbtnComponent],
+    declarations: [AppComponent, HomePage, TabsComponent, AddnewbtnComponent],
     entryComponents: [],
     imports: [BrowserModule, HttpClientModule, HttpModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
-    exports: [HeaderComponent],
+    exports: [],
     providers: [
         HttpClientModule,
         StatusBar,

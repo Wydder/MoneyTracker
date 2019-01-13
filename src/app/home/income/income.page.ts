@@ -4,6 +4,7 @@ import { Income } from "src/app/classes/income";
 import { Router } from "@angular/router";
 import { Chartvar } from 'src/app/classes/chartvar';
 import { ChartBuilderService } from 'src/app/charts/services/chart-builder.service';
+import { Dateform } from "src/app/classes/dateform";
 
 @Component({
   selector: 'app-income',
@@ -23,7 +24,7 @@ export class IncomePage implements OnInit {
      * Variables
     **/    
     incomeList: Income[];
-    chartMode: boolean = false;
+    chartMode: boolean = true;
     doughnutChart: any;
     toggleLabelChart: string = "chart";
     toggleLabelList: string = "list";
@@ -31,11 +32,13 @@ export class IncomePage implements OnInit {
     categoryListNames: string[] = [];
     chartVar: Chartvar = new Chartvar();
     chartType: boolean = false;
-    startDate: string;
-    endDate: string;
     listIsReady: boolean;
+    title: string;
+    dateForm: Dateform;
 
-    constructor(public router: Router, private incomeApi: IncomeapiService,  private chartService: ChartBuilderService) {
+    constructor(public router: Router, private incomeApi: IncomeapiService, private chartService: ChartBuilderService) {
+        this.title = "Income list";
+        this.dateForm = new Dateform();
         this.incomeList = [];
     }
 
@@ -64,9 +67,9 @@ export class IncomePage implements OnInit {
         }
     }
 
-    populateIncomeListQ(): any {
+    populateIncomeListQ(dateForm: Dateform): any {
         if (this.incomeApi) {
-            this.incomeApi.getDataByDate(this.startDate, this.endDate).subscribe(response => {
+            this.incomeApi.getDataByDate(dateForm.startDate, dateForm.endDate).subscribe(response => {
                 console.log(response)
                 this.incomeList = response;
                 this.chartVar = this.chartService.getChartData(this.incomeList);
@@ -102,6 +105,10 @@ export class IncomePage implements OnInit {
     editIncomeFromList(income: Income) {
         this.incomeListName.closeSlidingItems();
         this.populateIncomeList();
+    }
+
+    chartModeListener(chartModeOn: boolean) {
+        this.chartMode = chartModeOn
     }
 
 }

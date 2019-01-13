@@ -23,7 +23,13 @@ export class ChartBuilderService {
         var result = [];
         x.reduce(function (res, value) {
             if (!res[value.category.name] && !res[value.category.backgroundColor] && !res[value.category.borderColor]) {
-                res[value.category.name] = { name: value.category.name, total: 0, backgroundColor: value.category.backgroundColor, borderColor: value.category.borderColor, borderWidth: value.category.borderWidth };
+                res[value.category.name] = {
+                    name: value.category.name,
+                    total: 0,
+                    backgroundColor: value.category.backgroundColor,
+                    borderColor: value.category.borderColor,
+                    borderWidth: value.category.borderWidth
+                };
                 result.push(res[value.category.name])
             }
             res[value.category.name].total += value.ammount;

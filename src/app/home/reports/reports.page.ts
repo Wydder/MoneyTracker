@@ -12,8 +12,7 @@ import { Chartvar } from "src/app/classes/chartvar";
     styleUrls: ['./reports.page.scss'],
 })
 export class ReportsPage implements OnInit {
-
-
+    
     incomeList: Income[];
     expenseList: Expense[];
     listIsReady: boolean;

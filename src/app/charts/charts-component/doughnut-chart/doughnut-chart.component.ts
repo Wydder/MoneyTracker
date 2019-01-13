@@ -37,6 +37,16 @@ export class DoughnutChartComponent implements OnInit {
                 backgroundColor: this.chartVar.backgroundColor,
                 hoverBackgroundColor: this.chartVar.borderColor
             }]
+        },
+        options: {
+            maintainAspectRatio: false,
+            legend: {
+                position: "bottom",
+                display: true,
+                labels: {
+                    fontColor: 'rgb(39, 40, 34)'
+                }
+            }            
         }
 
     });

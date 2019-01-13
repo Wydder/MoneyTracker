@@ -1,54 +1,41 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-title>
-            <ion-item>
-                <ion-toggle [(ngModel)]="chartMode"></ion-toggle>
-                <ion-label>Toggle for {{ chartMode == true ? toggleLabelList : toggleLabelChart }}</ion-label>
-            </ion-item>
-        </ion-title>
-    </ion-toolbar>
-    <ion-toolbar>
-        <ion-grid>
-            <ion-row>
-                <ion-col size="5">
-                    <ion-item>
-                        <ion-label position="stacked" color="primary">Start date</ion-label>
-                        <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="startDate"></ion-datetime>
-                    </ion-item>
-                </ion-col>
-                <ion-col size="5">
-                    <ion-item>
-                        <ion-label position="stacked" color="primary">End date</ion-label>
-                        <ion-datetime display-format="DD/MM/YYYY" [(ngModel)]="endDate"></ion-datetime>
-                    </ion-item>
-                </ion-col>
-                <ion-col size="2">
-                    <ion-button class="srcBtn" (click)="populateIncomeListQ()" position="center" color="primary"><ion-icon name="search"></ion-icon></ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
-</ion-header>
+<!-- Header -->
+<app-header [title]="title" 
+            [dateForm]="dateForm"
+            (listModeOutput)="chartModeListener($event)" 
+            (chartModeOutput)="chartModeListener($event)" 
+            (dateFormOutput)="populateIncomeListQ($event)">
 
+</app-header>
+
+<!-- Content -->
 <ion-content *ngIf="!listIsReady">
-    <ion-spinner name="lines"></ion-spinner>
-</ion-content>
-<div>
+    <ion-spinner name="lines">
 
-</div>
-<ion-content *ngIf="chartMode && listIsReady" padding>
-    <ion-item>
-        <ion-toggle [(ngModel)]="chartType"></ion-toggle>
-        <ion-label>Change chart type</ion-label>
-    </ion-item>
-    <app-bar-chart *ngIf="chartType" [chartVar]="chartVar"></app-bar-chart>
-    <app-doughnut-chart *ngIf="!chartType" [chartVar]="chartVar"></app-doughnut-chart>
+    </ion-spinner>
+</ion-content>
+<ion-content *ngIf="chartMode && listIsReady">
+    <ion-slides>
+        <ion-slide>
+            <app-doughnut-chart [chartVar]="chartVar">
+
+            </app-doughnut-chart>
+        </ion-slide>
+        <ion-slide>
+            <app-bar-chart [chartVar]="chartVar">
+
+            </app-bar-chart>
+        </ion-slide>
+    </ion-slides>    
 </ion-content>
 <ion-content [hidden]="chartMode && listIsReady" padding>
     <ion-list #incomeListName>
         <ion-item-sliding *ngFor="let income of incomeList">
-            <app-incomeitem (onAddIncomeOutput)="addIncome($event)" (onEditIncomeOutput)="editIncomeFromList($event)"
-                            (deleteIncomeOutput)="deleteIncomeFromList($event)" [income]="income"></app-incomeitem>
+            <app-incomeitem (onAddIncomeOutput)="addIncome($event)" 
+                            (onEditIncomeOutput)="editIncomeFromList($event)"
+                            (deleteIncomeOutput)="deleteIncomeFromList($event)" 
+                            [income]="income">
+
+            </app-incomeitem>
         </ion-item-sliding>
     </ion-list>
 </ion-content>

@@ -36,7 +36,7 @@ export class FGexpenseComponent implements OnInit {
 
     logForm() {
         console.log(this.expenseModel)
-        this.expenseFormOutput.emit(this.expenseModel)
+        this.expenseFormOutput.emit(this.expenseModel);
     }
 
     getExpenseCategoryList() {

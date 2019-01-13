@@ -16,7 +16,6 @@ export class IncomeitemComponent implements OnInit {
     // Output
     @Output()
     deleteIncomeOutput: EventEmitter<Income> = new EventEmitter();
-    editIncomeOutput: EventEmitter<Income> = new EventEmitter();
 
 
     constructor(public router: Router) { }

@@ -5,9 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { HeaderComponent } from './header/header.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { AddnewbtnComponent } from './addnewbtn/addnewbtn.component';
+import { HeaderComponent } from "src/app/home/header/header.component";
 
 @NgModule({
     imports: [
@@ -21,6 +21,8 @@ import { AddnewbtnComponent } from './addnewbtn/addnewbtn.component';
             }
         ])
     ],
-    declarations: []
+    exports: [
+    ],
+    declarations: [HeaderComponent]
 })
 export class HomePageModule { }
