@@ -49,9 +49,13 @@ export class HeaderComponent implements OnInit {
         }
     }
 
-    searchContainer() {        
-        this.searchFormActive = true;
-        this.toolbar.closeSlidingItems();
+    searchContainer() {
+        if (!this.searchFormActive) {
+            this.searchFormActive = true;
+        } else {
+            this.searchFormActive = false;
+            this.toolbar.closeSlidingItems();
+        }
     }
 
     logForm() {

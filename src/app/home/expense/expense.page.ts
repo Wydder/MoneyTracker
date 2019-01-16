@@ -5,6 +5,7 @@ import { Chartvar } from "src/app/classes/chartvar";
 import { ExpensecategoryService } from "src/app/services/expenseapi/expensecategory.service";
 import { ChartBuilderService } from 'src/app/charts/services/chart-builder.service';
 import { Dateform } from "src/app/classes/dateform";
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @Component({
     selector: 'app-expense',

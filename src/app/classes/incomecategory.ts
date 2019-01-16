@@ -1,3 +1,6 @@
 export class Incomecategory {
-    name: string;    
+    name: string;
+    backgroundColor: string;
+    borderColor: string;
+    borderWidth: number;  
 }

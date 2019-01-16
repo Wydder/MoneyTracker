@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-list #toolbar>       
+    <ion-list #toolbar>
         <ion-item-sliding>
             <ion-item>
                 <ion-title text-center>{{ title }}</ion-title>
@@ -18,18 +18,16 @@
         </ion-item-sliding>
     </ion-list>
 </ion-header>
-<ion-header *ngIf="searchFormActive">
-    <ion-toolbar>
-        <form #dateForm="ngForm" (ngSubmit)="logForm()">
-            <ion-item>
-                <ion-label color="primary">Start date</ion-label>
-                <ion-datetime name="startDate" #startDate="ngModel" display-format="DD/MM/YYYY" [(ngModel)]="dateForm.startDate"></ion-datetime>
-            </ion-item>
-            <ion-item>
-                <ion-label color="primary">End date</ion-label>
-                <ion-datetime name="endDate" #endDate="ngModel" display-format="DD/MM/YYYY" [(ngModel)]="dateForm.endDate"></ion-datetime>
-            </ion-item>
-            <ion-button type="submit" color="primary">Search</ion-button>
-        </form>
-    </ion-toolbar>
-</ion-header>
+<div *ngIf="searchFormActive">
+    <form #dateForm="ngForm" (ngSubmit)="logForm()">
+        <ion-item>
+            <ion-label color="primary">Start date</ion-label>
+            <ion-datetime name="startDate" #startDate="ngModel" display-format="DD/MM/YYYY" [(ngModel)]="dateForm.startDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="primary">End date</ion-label>
+            <ion-datetime name="endDate" #endDate="ngModel" display-format="DD/MM/YYYY" [(ngModel)]="dateForm.endDate"></ion-datetime>
+        </ion-item>
+        <ion-button type="submit" color="primary">Search</ion-button>
+    </form>
+</div>

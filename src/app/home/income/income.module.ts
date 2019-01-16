@@ -10,6 +10,7 @@ import { EditincomeComponent } from './editincome/editincome.component';
 import { FGincomeComponent } from './fgincome/fgincome.component';
 import { ChartModule } from 'src/app/charts/chart.module';
 import { CommonComponentsModule } from "src/app/common-components/common-components.module";
+import { ColorPickerModule } from "ngx-color-picker";
 
 const routes: Routes = [
     {
@@ -33,7 +34,8 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes),
         ChartModule,
-        CommonComponentsModule
+        CommonComponentsModule,
+        ColorPickerModule
     ],
     declarations: [IncomePage, IncomeitemComponent, NewincomeComponent, EditincomeComponent, FGincomeComponent]
 })

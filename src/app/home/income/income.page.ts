@@ -5,11 +5,14 @@ import { Router } from "@angular/router";
 import { Chartvar } from 'src/app/classes/chartvar';
 import { ChartBuilderService } from 'src/app/charts/services/chart-builder.service';
 import { Dateform } from "src/app/classes/dateform";
+import { ColorPickerModule } from 'ngx-color-picker';
+import { CategoryListService } from "src/app/common-components/services/category-list.service";
+import { Incomecategory } from "src/app/classes/incomecategory";
 
 @Component({
-  selector: 'app-income',
-  templateUrl: './income.page.html',
-  styleUrls: ['./income.page.scss'],
+    selector: 'app-income',
+    templateUrl: './income.page.html',
+    styleUrls: ['./income.page.scss'],
 })
 export class IncomePage implements OnInit {
 
@@ -18,33 +21,36 @@ export class IncomePage implements OnInit {
     @ViewChild('incomeListName') incomeListName;
 
     income: Income = new Income();
-    
-    
+
+
     /**
      * Variables
-    **/    
+    **/
     incomeList: Income[];
     chartMode: boolean = true;
     doughnutChart: any;
     toggleLabelChart: string = "chart";
     toggleLabelList: string = "list";
     barChartMode: boolean = true;
-    categoryListNames: string[] = [];
+    categoryList: Incomecategory[];
     chartVar: Chartvar = new Chartvar();
     chartType: boolean = false;
     listIsReady: boolean;
     title: string;
     dateForm: Dateform;
+    slideOpts = {}
 
-    constructor(public router: Router, private incomeApi: IncomeapiService, private chartService: ChartBuilderService) {
+
+    constructor(public router: Router, private incomeApi: IncomeapiService, private chartService: ChartBuilderService, private categoryListService: CategoryListService) {
         this.title = "Income list";
         this.dateForm = new Dateform();
+        this.slideOpts = {
+            initialSlide: 0
+        };
         this.incomeList = [];
     }
 
     ngOnInit() {
-        this.populateIncomeList();
-        console.log(this.incomeList);
     }
 
     ionViewWillEnter() {
@@ -59,8 +65,8 @@ export class IncomePage implements OnInit {
                 console.log(response)
                 this.incomeList = response;
                 this.chartVar = this.chartService.getChartData(this.incomeList);
+                this.categoryList = this.categoryListService.generateCategoryList(this.incomeList);
                 this.listIsReady = true;
-                console.log(this.chartVar);
             })
         } else {
             console.log('Response is not defined')
@@ -74,7 +80,6 @@ export class IncomePage implements OnInit {
                 this.incomeList = response;
                 this.chartVar = this.chartService.getChartData(this.incomeList);
                 this.listIsReady = true;
-                console.log(this.chartVar);
             })
         } else {
             console.log('Response is not defined')
@@ -85,7 +90,7 @@ export class IncomePage implements OnInit {
 
     // Add Income
     addIncome(income: Income) {
-        this.populateIncomeList();        
+        this.populateIncomeList();
     }
 
 
@@ -109,6 +114,10 @@ export class IncomePage implements OnInit {
 
     chartModeListener(chartModeOn: boolean) {
         this.chartMode = chartModeOn
+    }
+
+    trackByIndex(index: number, obj: any): any {
+        return index;
     }
 
 }

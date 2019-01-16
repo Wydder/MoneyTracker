@@ -1,8 +1,8 @@
 <!-- Header -->
-<app-header [title]="title" 
+<app-header [title]="title"
             [dateForm]="dateForm"
-            (listModeOutput)="chartModeListener($event)" 
-            (chartModeOutput)="chartModeListener($event)" 
+            (listModeOutput)="chartModeListener($event)"
+            (chartModeOutput)="chartModeListener($event)"
             (dateFormOutput)="populateIncomeListQ($event)">
 
 </app-header>
@@ -14,7 +14,17 @@
     </ion-spinner>
 </ion-content>
 <ion-content *ngIf="chartMode && listIsReady">
-    <ion-slides>
+    <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide>
+            <ion-list>
+                <ion-item *ngFor="let category of categoryList;
+                  let index = index;
+                  trackBy: trackByIndex;">
+                    <ion-label position="stacked" color="primary">{{ category.name }}</ion-label>
+                    <input [(colorPicker)]="categoryList[index].backgroundColor" [style.background]="category.backgroundColor" [(ngModel)]="categoryList[index].backgroundColor">
+                </ion-item>
+            </ion-list>
+        </ion-slide>
         <ion-slide>
             <app-doughnut-chart [chartVar]="chartVar">
 
@@ -25,14 +35,14 @@
 
             </app-bar-chart>
         </ion-slide>
-    </ion-slides>    
+    </ion-slides>
 </ion-content>
 <ion-content [hidden]="chartMode && listIsReady" padding>
     <ion-list #incomeListName>
         <ion-item-sliding *ngFor="let income of incomeList">
-            <app-incomeitem (onAddIncomeOutput)="addIncome($event)" 
+            <app-incomeitem (onAddIncomeOutput)="addIncome($event)"
                             (onEditIncomeOutput)="editIncomeFromList($event)"
-                            (deleteIncomeOutput)="deleteIncomeFromList($event)" 
+                            (deleteIncomeOutput)="deleteIncomeFromList($event)"
                             [income]="income">
 
             </app-incomeitem>
