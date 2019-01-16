@@ -19,7 +19,7 @@
     </ion-list>
 </ion-header>
 <div *ngIf="searchFormActive">
-    <form #dateForm="ngForm" (ngSubmit)="logForm()">
+    <form #dateFormForm="ngForm" (ngSubmit)="logForm()">
         <ion-item>
             <ion-label color="primary">Start date</ion-label>
             <ion-datetime name="startDate" #startDate="ngModel" display-format="DD/MM/YYYY" [(ngModel)]="dateForm.startDate"></ion-datetime>

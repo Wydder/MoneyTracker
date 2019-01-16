@@ -39,7 +39,7 @@ export class IncomePage implements OnInit {
     title: string;
     dateForm: Dateform;
     slideOpts = {}
-
+    border: any;
 
     constructor(public router: Router, private incomeApi: IncomeapiService, private chartService: ChartBuilderService, private categoryListService: CategoryListService) {
         this.title = "Income list";
@@ -57,6 +57,8 @@ export class IncomePage implements OnInit {
         this.incomeListName.closeSlidingItems();
         this.populateIncomeList();
     }
+
+    
 
     // Populate list
     populateIncomeList(): any {

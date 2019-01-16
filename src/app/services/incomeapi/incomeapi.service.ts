@@ -50,8 +50,9 @@ export class IncomeapiService {
         return this.http.put(this.urlIncomeList + '/' + id, income, { headers: this.headers });
     }
 
-    getDataByDate(startDate: string, endDate: string) {
-        var queryUrl = this.urlIncomeList + '?q={"date":{"$gt":{"$date":' + startDate + '},"$lt":{"$date":' + endDate + '}}}'
+    getDataByDate(startDate: Date, endDate: Date) {
+        var queryUrl = this.urlIncomeList + '?q={"date":{"$gt":{"$date":"' + startDate + '"},"$lt":{"$date":"' + endDate + '"}}}'
+        //var queryUrl = encodeURIComponent(queryUrlCoded);
         //var queryUrl = this.urlIncomeList + '?q = { "_created": { "$gt": { "$date": "$currentMonth" } } }'
         var responseObservable = map((response: Response) => {
             return response.json();

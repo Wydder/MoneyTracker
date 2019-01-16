@@ -10,7 +10,6 @@ export class CategoryListService {
     generateCategoryList(list) {
         var categoryList = [];
         for (let i = 0; list.length > i; i++) {
-            console.log(list[i].category);
             categoryList.push(list[i].category);
         }
         return categoryList

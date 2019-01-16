@@ -18,8 +18,8 @@ export class ReportsPage implements OnInit {
     listIsReady: boolean;
     chartType: boolean = false;
     chartVar: Chartvar;
-    startDate: string;
-    endDate: string;
+    startDate: Date;
+    endDate: Date;
     title: string = 'Money tracker';
 
 

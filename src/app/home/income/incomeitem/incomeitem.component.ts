@@ -31,6 +31,4 @@ export class IncomeitemComponent implements OnInit {
         console.log('this should edit');
         this.router.navigate(['home/income/editincome/' + income._id]);
     }
-
-
 }

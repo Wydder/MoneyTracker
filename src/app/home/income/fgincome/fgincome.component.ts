@@ -39,8 +39,7 @@ export class FGincomeComponent implements OnInit {
         this.incomeFormOutput.emit(this.incomeModel)
     }
 
-    getIncomeCategoryList() {
-        
+    getIncomeCategoryList() {        
         if (this.incomeCategoryApi) {
             this.incomeCategoryApi.getExpenseCategory().subscribe(response => {
                 console.log(response)

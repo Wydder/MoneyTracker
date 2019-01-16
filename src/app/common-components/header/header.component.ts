@@ -12,8 +12,8 @@ export class HeaderComponent implements OnInit {
     @Input()
     title: string;
 
-    @Input()
-    dateForm: Dateform;
+    // @Input()
+    // dateForm: Dateform;
 
     @Output()
     chartModeOutput: EventEmitter<any> = new EventEmitter();
@@ -33,13 +33,15 @@ export class HeaderComponent implements OnInit {
      */
     searchFormActive: boolean = false;
     chartMode: boolean = true;
-    //dateForm: Dateform = new Dateform();
+    dateForm: Dateform;
 
     constructor() {
 
     }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this.dateForm = new Dateform();
+    }
 
     onChartMode(chartMode) {
         if (this.chartMode) {
@@ -52,6 +54,8 @@ export class HeaderComponent implements OnInit {
     searchContainer() {
         if (!this.searchFormActive) {
             this.searchFormActive = true;
+            this.dateForm = new Dateform();
+            this.dateForm.startDate = new Date(2019,1,1);
         } else {
             this.searchFormActive = false;
             this.toolbar.closeSlidingItems();
@@ -59,7 +63,7 @@ export class HeaderComponent implements OnInit {
     }
 
     logForm() {
-        this.dateFormOutput.emit(this.dateForm);
+              this.dateFormOutput.emit(this.dateForm);
         this.searchFormActive = false;
     }
 

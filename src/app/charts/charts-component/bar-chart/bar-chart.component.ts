@@ -19,10 +19,7 @@ export class BarChartComponent implements OnInit {
 
     justChart: any;
 
-    constructor() {
-        console.log("construcotr chart");
-
-    }
+    constructor() { }
 
     ngOnInit() {
         this.barchartModeFunction();
