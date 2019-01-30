@@ -45,7 +45,7 @@ export class IncomePage implements OnInit {
         this.title = "Income list";
         this.dateForm = new Dateform();
         this.slideOpts = {
-            initialSlide: 0
+            
         };
         this.incomeList = [];
     }
@@ -71,7 +71,7 @@ export class IncomePage implements OnInit {
                 this.listIsReady = true;
             })
         } else {
-            console.log('Response is not defined')
+            console.error('Response is not defined')
         }
     }
 
@@ -84,7 +84,7 @@ export class IncomePage implements OnInit {
                 this.listIsReady = true;
             })
         } else {
-            console.log('Response is not defined')
+            console.error('Response is not defined')
         }
     }
 
@@ -116,10 +116,6 @@ export class IncomePage implements OnInit {
 
     chartModeListener(chartModeOn: boolean) {
         this.chartMode = chartModeOn
-    }
-
-    trackByIndex(index: number, obj: any): any {
-        return index;
     }
 
 }

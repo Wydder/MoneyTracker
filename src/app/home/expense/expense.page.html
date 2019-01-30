@@ -25,7 +25,7 @@
 </ion-content>
 <ion-content [hidden]="chartMode && listIsReady" padding>
     <ion-list #expenseListName>
-        <ion-item-sliding *ngFor="let expense of expenseList">
+        <ion-item-sliding *ngFor="let expense of expenseList" [ngStyle]="{'border-left': '4px solid ' + expense.category.borderColor}" >
             <app-expenseitem (onEditExpenseOutput)="editExpenseFromList($event)" 
                              (onAddExpenseOutput)="onAddExpense($event)"                
                              (deleteExpenseOutput)="deleteExpenseFromList($event)" 

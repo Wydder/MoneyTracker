@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { Dateform } from "src/app/classes/dateform";
+import { Router, ActivatedRoute, NavigationExtras } from "@angular/router";
 
 @Component({
     selector: 'app-header',
@@ -35,11 +36,11 @@ export class HeaderComponent implements OnInit {
     chartMode: boolean = true;
     dateForm: Dateform;
 
-    constructor() {
+    constructor(private router: Router, private route: ActivatedRoute) {
 
     }
 
-    ngOnInit() { 
+    ngOnInit() {
         this.dateForm = new Dateform();
     }
 
@@ -55,7 +56,6 @@ export class HeaderComponent implements OnInit {
         if (!this.searchFormActive) {
             this.searchFormActive = true;
             this.dateForm = new Dateform();
-            this.dateForm.startDate = new Date(2019,1,1);
         } else {
             this.searchFormActive = false;
             this.toolbar.closeSlidingItems();
@@ -63,8 +63,22 @@ export class HeaderComponent implements OnInit {
     }
 
     logForm() {
-              this.dateFormOutput.emit(this.dateForm);
+        this.dateFormOutput.emit(this.dateForm);
         this.searchFormActive = false;
+        var currentUrl = this.router.url;
+        let navigationExtras: NavigationExtras = {
+            queryParams: { startDate: '"' + this.dateForm.startDate + '"', endDate: '"' + this.dateForm.endDate + '"'  },
+            fragment: 'anchor'
+        };
+        //this.router.navigate(['expense', navigationExtras]);
+    }
+
+    startDateChanged() {
+        //var startDate = new URLSearchParams.append(startDate, this.dateForm.startDate)
+    }
+
+    endDateChanged() {
+        
     }
 
 }

@@ -13,17 +13,7 @@
     </ion-spinner>
 </ion-content>
 <ion-content *ngIf="chartMode && listIsReady">
-    <ion-slides pager="true" [options]="slideOpts">
-        <!-- <ion-slide>
-            <ion-list>
-                <ion-item *ngFor="let category of categoryList;
-                  let index = index;
-                  trackBy: trackByIndex;">
-                    <ion-label position="stacked" color="primary">{{ category.name }}</ion-label>
-                    <input [(colorPicker)]="categoryList[index].backgroundColor" [style.background]="category.backgroundColor" [(ngModel)]="categoryList[index].backgroundColor">
-                </ion-item>
-            </ion-list>
-        </ion-slide> -->
+    <ion-slides pager="true" [options]="slideOpts">        
         <ion-slide>
             <app-doughnut-chart [chartVar]="chartVar">
 
