@@ -66,11 +66,13 @@ export class HeaderComponent implements OnInit {
         this.dateFormOutput.emit(this.dateForm);
         this.searchFormActive = false;
         var currentUrl = this.router.url;
-        let navigationExtras: NavigationExtras = {
-            queryParams: { startDate: '"' + this.dateForm.startDate + '"', endDate: '"' + this.dateForm.endDate + '"'  },
-            fragment: 'anchor'
-        };
-        //this.router.navigate(['expense', navigationExtras]);
+        let params = { startDate: this.dateForm.startDate, endDate: this.dateForm.endDate };
+
+        const urlTree = this.router.parseUrl(currentUrl);
+        const urlWithoutParams = urlTree.root.children['primary'].segments.map(it => it.path).join('/');
+
+
+        this.router.navigate([urlWithoutParams], { queryParams: params });
     }
 
     startDateChanged() {

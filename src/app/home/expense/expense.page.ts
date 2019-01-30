@@ -6,6 +6,7 @@ import { ExpensecategoryService } from "src/app/services/expenseapi/expensecateg
 import { ChartBuilderService } from 'src/app/charts/services/chart-builder.service';
 import { Dateform } from "src/app/classes/dateform";
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-expense',
@@ -37,7 +38,7 @@ export class ExpensePage implements OnInit {
     title: string;
     dateForm: Dateform;
 
-    constructor(private expenseApi: ExpenseapiService, private chartService: ChartBuilderService) {
+    constructor(private route: ActivatedRoute,private expenseApi: ExpenseapiService, private chartService: ChartBuilderService) {
         this.title = "Expense list"
         this.expenseList = [];
     }
@@ -47,8 +48,16 @@ export class ExpensePage implements OnInit {
 
     ionViewWillEnter() {
         this.dateForm = new Dateform();
+        this.route.queryParams.subscribe(params => {
+            let urlParams = params
+            console.log(urlParams);
+            if(urlParams.startDate && urlParams.endDate) {
+                this.populateExpenseListQ(urlParams);
+            } else {                
+                this.populateExpenseList();
+            }
+        });
         this.expenseListName.closeSlidingItems();
-        this.populateExpenseList();
     }
 
     ngAfterViewInit() {
@@ -71,7 +80,7 @@ export class ExpensePage implements OnInit {
         }
     }
 
-    populateExpenseListQ(dateForm: Dateform): any {
+    populateExpenseListQ(dateForm): any {
         if (this.expenseApi) {
             this.expenseApi.getDataByDate(dateForm.startDate, dateForm.endDate).subscribe(response => {
                 console.log(response)

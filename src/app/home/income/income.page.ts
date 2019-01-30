@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IncomeapiService } from "src/app/services/incomeapi/incomeapi.service";
 import { Income } from "src/app/classes/income";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { Chartvar } from 'src/app/classes/chartvar';
 import { ChartBuilderService } from 'src/app/charts/services/chart-builder.service';
 import { Dateform } from "src/app/classes/dateform";
@@ -41,7 +41,7 @@ export class IncomePage implements OnInit {
     slideOpts = {}
     border: any;
 
-    constructor(public router: Router, private incomeApi: IncomeapiService, private chartService: ChartBuilderService, private categoryListService: CategoryListService) {
+    constructor(private route: ActivatedRoute, public router: Router, private incomeApi: IncomeapiService, private chartService: ChartBuilderService, private categoryListService: CategoryListService) {
         this.title = "Income list";
         this.dateForm = new Dateform();
         this.slideOpts = {
@@ -51,11 +51,21 @@ export class IncomePage implements OnInit {
     }
 
     ngOnInit() {
+
     }
 
     ionViewWillEnter() {
-        this.incomeListName.closeSlidingItems();
-        this.populateIncomeList();
+        this.route.queryParams.subscribe(params => {
+            let urlParams = params
+            console.log(urlParams);
+            if(urlParams.startDate && urlParams.endDate) {
+                this.populateIncomeListQ(urlParams);
+            } else {                
+                this.populateIncomeList();
+            }
+            this.incomeListName.closeSlidingItems();
+        });
+
     }
 
     
@@ -75,7 +85,7 @@ export class IncomePage implements OnInit {
         }
     }
 
-    populateIncomeListQ(dateForm: Dateform): any {
+    populateIncomeListQ(dateForm): any {
         if (this.incomeApi) {
             this.incomeApi.getDataByDate(dateForm.startDate, dateForm.endDate).subscribe(response => {
                 console.log(response)
