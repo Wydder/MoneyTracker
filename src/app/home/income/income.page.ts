@@ -91,6 +91,7 @@ export class IncomePage implements OnInit {
                 console.log(response)
                 this.incomeList = response;
                 this.chartVar = this.chartService.getChartData(this.incomeList);
+                this.categoryList = this.categoryListService.generateCategoryList(this.incomeList);
                 this.listIsReady = true;
             })
         } else {
